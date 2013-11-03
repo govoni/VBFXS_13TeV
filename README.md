@@ -1,7 +1,7 @@
 calculate VBF Higgs XS at 13 TeV
 =======
 
-read the central value and aigenvector variation output
+read the central value and eigenvector variation output
 ----
 
 - read_01.py: 
