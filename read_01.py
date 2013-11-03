@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+from math import sqrt
 import sys
 import subprocess
 import operator
@@ -40,13 +41,11 @@ if __name__ == '__main__':
     print lines[30]
     print lines[31]
     print lines[32]
-    print '---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- '
     print lines[209]
     print '---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- '
 
     totalXS_str = lines[209]
     totalXS = float (totalXS_str.replace (' Total cross section    =', '').replace (' ',''))
-#    print totalXS
 
     values = []
     read = 'n'
@@ -60,12 +59,6 @@ if __name__ == '__main__':
                 values.append ([XS, e_XS])
         elif 'Results for different PDF sets' in lines[i] : read = 'y'
 
-    print '---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- '
-    print len (values)
-    print values[0][0]
-    print values[1][0]
-    print '---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- '
-#    for i in range (0, 5) :
     sum_posi = int (0)
     sum_nega = int (0)
     for i in range (0, len (values)/2) :
@@ -75,7 +68,12 @@ if __name__ == '__main__':
         val_nega = max ((totalXS - values[2*i][0]), (totalXS - values[2*i+1][0]))
         if val_nega < 0 : val_nega = 0
         sum_nega += val_nega * val_nega
-        
+
+    print '    total XS      :',totalXS
+    print '    positive error:', sqrt (sum_posi) / 1.64485
+    print '    negative error:', sqrt (sum_nega) / 1.64485
+    print '---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- '
+    print totalXS, sqrt (sum_posi) / 1.64485, sqrt (sum_nega) / 1.64485
 
 
     
