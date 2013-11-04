@@ -21,14 +21,31 @@ def max (uno, due) :
 # ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
 
+def findXS (lines) :
+    startReading = 'n'
+    for line in lines :
+        if startReading != 'n' :
+            if 'Total cross section' in line :
+                return float (line.split ()[4])
+        elif 'Complete results' in line : 
+            startReading = 'y'
+    return float (-1)
+
+
+# ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+
+
 if __name__ == '__main__':
 
 
-    if len (sys.argv) < 2 : 
-        print 'usage: ', sys.argv[0], ' output_filename\n'
+    if len (sys.argv) < 3 : 
+        print 'usage: ', sys.argv[0], ' output_filename type (ct10, mstw)\n'
         exit (1)
         
     fileName = sys.argv[1]
+    coefficient = float (1)
+    if type == 'ct10' : coefficient = float (1. / 1.64485)
+    
 
     #PG read filename content
     lines = open (fileName, 'r').read ().split ('\n')
@@ -41,12 +58,14 @@ if __name__ == '__main__':
     print lines[30]
     print lines[31]
     print lines[32]
+    print lines[36]
     print lines[209]
     print '---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- '
 
-    totalXS_str = lines[209]
-    totalXS = float (totalXS_str.replace (' Total cross section    =', '').replace (' ',''))
-
+#    totalXS_str = lines[209]
+#    totalXS = float (totalXS_str.replace (' Total cross section    =', '').replace (' ',''))
+    totalXS = findXS (lines)
+    
     values = []
     read = 'n'
     for i in range (210, len (lines)) :
@@ -70,10 +89,10 @@ if __name__ == '__main__':
         sum_nega += val_nega * val_nega
 
     print '    total XS      :',totalXS
-    print '    positive error:', sqrt (sum_posi) / 1.64485
-    print '    negative error:', sqrt (sum_nega) / 1.64485
+    print '    positive error:', sqrt (sum_posi) * coefficient
+    print '    negative error:', sqrt (sum_nega) * coefficient
     print '---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- '
-    print totalXS, sqrt (sum_posi) / 1.64485, sqrt (sum_nega) / 1.64485
+    print totalXS, sqrt (sum_posi) * coefficient, sqrt (sum_nega) * coefficient
 
 
     
