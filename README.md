@@ -22,8 +22,8 @@ calculate positive and negative uncertainty due to variation of alphaS, for CT10
    - read the cross-section for variation plus and minus, calc error according to formulas on the pdf
    - usage example:
    
-   ``python read_02.py \
-   ../results-HE/m125.5-alphaMSTW2008nlo68cl_asmz+68cl.LHgrid-13000/outputfile-mstw-alphaMSTW2008nlo68cl_asmz+68cl.LHgrid-m125.5 \
+   ``python read_02.py \``
+   ``../results-HE/m125.5-alphaMSTW2008nlo68cl_asmz+68cl.LHgrid-13000/outputfile-mstw-alphaMSTW2008nlo68cl_asmz+68cl.LHgrid-m125.5 \
    ../results-HE/m125.5-alphaMSTW2008nlo68cl_asmz-68cl.LHgrid-13000/outputfile-mstw-alphaMSTW2008nlo68cl_asmz-68cl.LHgrid-m125.5 \
    mstw `python read_01.py ../results-HE/m125.5-13000-job8/outputfile-mstw-m125.5 mstw | tail -n 1 | awk '{print $1}'` ``
 
