@@ -27,4 +27,9 @@ calculate positive and negative uncertainty due to variation of alphaS, for CT10
    ``../results-HE/m125.5-alphaMSTW2008nlo68cl_asmz-68cl.LHgrid-13000/outputfile-mstw-alphaMSTW2008nlo68cl_asmz-68cl.LHgrid-m125.5 \``
    ``mstw `python read_01.py ../results-HE/m125.5-13000-job8/outputfile-mstw-m125.5 mstw | tail -n 1 | awk '{print $1}'` ``
 
+calculate the total uncertainty for NNPDF
+----
+
+- read_03.py
+   - it does everything according to par. 4.1 of the instructions
       
