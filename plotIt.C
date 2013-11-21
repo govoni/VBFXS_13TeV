@@ -15,8 +15,8 @@ TGraphAsymmErrors * getGraph (float val, float eplus, float eminus, float height
 void changeYaxis (TAxis * yaxis)
   {
     float binlimits[] = {-0.5, 0.5, 1.5, 2.5, 3.5} ;
-    yaxis->Set (5, binlimits) ;
-    TString labels[] = {"env", "nnpdf", "mstw", "ct10"} ;
+    yaxis->Set (4, binlimits) ;
+    TString labels[] = {"env", "ct10", "mstw", "nnpdf"} ;
     for (int i = 0 ; i < 5 ; ++i)
       yaxis->SetBinLabel (i+1, labels[i]) ;  
   }
@@ -71,6 +71,11 @@ int plotIt ()
   TGraphAsymmErrors * g_env_135_tot = getGraph (val_fr_135_mid, val_fr_135_max - val_fr_135_mid, val_fr_135_mid - val_fr_135_min, 0) ;
   TGraphAsymmErrors * g_env_140_tot = getGraph (val_fr_140_mid, val_fr_140_max - val_fr_140_mid, val_fr_140_mid - val_fr_140_min, 0) ;
 
+  cout << " XS at 13.0 TeV: " << val_fr_130_mid << " +- " << val_fr_130_max - val_fr_130_mid << endl ;
+  cout << " XS at 13.5 TeV: " << val_fr_135_mid << " +- " << val_fr_135_max - val_fr_135_mid << endl ;
+  cout << " XS at 14.0 TeV: " << val_fr_140_mid << " +- " << val_fr_140_max - val_fr_140_mid << endl ;
+
+
   // plotting
 
   TCanvas * c1 = new TCanvas ("c1", "c1", 1800, 500) ;
@@ -110,10 +115,10 @@ int plotIt ()
   TLine * l_140 = new TLine (4000, 0.5, 4500, 0.5) ;
   fr_140->SetTitle ("14.0 TeV") ;
   fr_140->GetXaxis ()->SetTitle ("cross-section (pb)") ;
-  g_ct10_140_pdf->Draw ("P same") ;
   g_ct10_140_tot->Draw ("P same") ;
-  g_mstw_140_pdf->Draw ("P same") ;
+  g_ct10_140_pdf->Draw ("P same") ;
   g_mstw_140_tot->Draw ("P same") ;
+  g_mstw_140_pdf->Draw ("P same") ;
   g_nnpdf_140_tot->Draw ("P same") ;
   l_140->Draw () ;
   g_env_140_tot->Draw ("P same") ;
